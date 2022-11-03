@@ -1,0 +1,39 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: hmdp
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.10.102:3306/hmdp?useSSL=false&serverTimezone=UTC
+    username: root
+    password: 1234
+  redis:
+    host: 192.168.10.102
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 10
+        min-idle: 1
+        time-between-eviction-runs: 10s
+  jackson:
+    default-property-inclusion: non_null # JSON处理时忽略非空字段
+
+#  消息队列
+  rabbitmq:
+    port: 5672
+    host: 192.168.10.102
+    virtual-host: /
+    publisher-returns: true
+    publisher-confirm-type: correlated
+    template:
+      mandatory: true
+    listener:
+      simple:
+        acknowledge-mode: manual
+mybatis-plus:
+  type-aliases-package: com.hmdp.entity # 别名扫描包
+logging:
+  level:
+    com.hmdp: debug

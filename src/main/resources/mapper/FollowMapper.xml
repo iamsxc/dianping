@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hmdp.mapper.FollowMapper">
+
+    <!--    List<Follow> getCommonFollow(@Param("aId") Long userId, @Param("bId") Long id);-->
+    <select id="getCommonFollow" resultType="java.lang.Long">
+        SELECT a.follow_user_id
+        FROM `tb_follow` a,`tb_follow` b
+        WHERE a.user_id=#{aId}
+          AND  b.user_id=#{bId}
+          AND a.follow_user_id=b.follow_user_id
+    </select>
+
+</mapper>
